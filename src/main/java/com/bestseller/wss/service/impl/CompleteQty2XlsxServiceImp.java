@@ -32,7 +32,7 @@ import com.fr.workspace.simple.SimpleWork;
 public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
 
 	@Override
-	public String completeQty2Xlsx(String fr_homeString, String report_nameString) {
+	public String completeQty2Xlsx(String frHomeString, String reportNameString) throws Exception{
 		// TODO Auto-generated method stub
 		com.fr.module.Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
@@ -47,7 +47,7 @@ public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
                 new ChartBaseActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
         //帆软所在路径
-        String envpath = fr_homeString;
+        String envpath = frHomeString;
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
@@ -55,7 +55,7 @@ public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
         SimpleDateFormat fileName = new SimpleDateFormat(Constant.TIME_FORMAT);
         
         try {
-        	 WorkBook workbook = (WorkBook) TemplateWorkBookIO.readTemplateWorkBook(report_nameString);
+        	 WorkBook workbook = (WorkBook) TemplateWorkBookIO.readTemplateWorkBook(reportNameString);
         	// 定义输出流
              String outputUrl=Constant.OUTPUT_RUL;
              FileOutputStream outputStream;
@@ -67,8 +67,9 @@ public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			//e.printStackTrace();
             module.stop();
+            throw e;
 		}
 		return null;
 	}
