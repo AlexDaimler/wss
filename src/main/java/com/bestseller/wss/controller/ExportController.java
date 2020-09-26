@@ -25,8 +25,8 @@ public class ExportController {
 			e.printStackTrace();
 			log.error(e.getMessage());
 		}
-		
-		return null;
+		log.info("Export complete quantity to excel file done!");
+		return "Export controller succesfully done";
 	}
 	
 }
