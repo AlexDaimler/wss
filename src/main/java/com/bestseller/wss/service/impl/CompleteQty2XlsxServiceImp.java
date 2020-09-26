@@ -28,11 +28,13 @@ import com.fr.stable.WriteActor;
 import com.fr.store.StateServiceActivator;
 import com.fr.workspace.simple.SimpleWork;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
-
 	@Override
 	public String completeQty2Xlsx(String frHomeString, String reportNameString) throws Exception{
+		log.info("Export service Start");
 		// TODO Auto-generated method stub
 		com.fr.module.Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
@@ -73,6 +75,7 @@ public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
 		}finally {
             SimpleWork.checkOut();
         }
+        log.info("Export service done");
 		return null;
 	}
 	
