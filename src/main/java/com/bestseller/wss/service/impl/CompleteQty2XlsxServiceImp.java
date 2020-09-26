@@ -70,7 +70,9 @@ public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
 			//e.printStackTrace();
             module.stop();
             throw e;
-		}
+		}finally {
+            SimpleWork.checkOut();
+        }
 		return null;
 	}
 	
