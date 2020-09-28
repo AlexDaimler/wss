@@ -15,11 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ExportController {
 	
 	@GetMapping(value="/completeQty2Xlsx")
-	public String completeQty2Xlsx(@RequestParam(value = "fr_home")String frHomeString, @RequestParam(value = "report_name") String reportNameString) {
+	public String completeQty2Xlsx(@RequestParam(value = "report_name") String reportNameString) {
 		log.info("ExportController");
 		CompleteQty2XlsxService service = new CompleteQty2XlsxServiceImp();
 		try {
-			service.completeQty2Xlsx(frHomeString, reportNameString);
+			service.completeQty2Xlsx(reportNameString);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

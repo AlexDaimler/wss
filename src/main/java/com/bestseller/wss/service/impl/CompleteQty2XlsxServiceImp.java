@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
 	@Override
-	public String completeQty2Xlsx(String frHomeString, String reportNameString) throws Exception{
+	public String completeQty2Xlsx(String reportNameString) throws Exception{
 		log.info("Export service Start");
 		// TODO Auto-generated method stub
 		com.fr.module.Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
@@ -54,7 +54,7 @@ public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
                 new ChartBaseActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
         //帆软所在路径
-        String envpath = frHomeString;
+        String envpath = Constant.FR_HOME;
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
