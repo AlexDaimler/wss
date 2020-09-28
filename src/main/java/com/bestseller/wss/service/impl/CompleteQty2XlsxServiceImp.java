@@ -2,11 +2,15 @@ package com.bestseller.wss.service.impl;
 
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.bestseller.wss.constant.Constant;
 import com.bestseller.wss.service.CompleteQty2XlsxService;
+import com.bestseller.wss.util.DateTools;
 import com.fr.base.operator.common.CommonOperator;
 import com.fr.chart.activator.ChartBaseActivator;
 import com.fr.cluster.engine.activator.standalone.StandaloneModeActivator;
@@ -31,6 +35,7 @@ import com.fr.workspace.simple.SimpleWork;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Service
 public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
 	@Override
 	public String completeQty2Xlsx(String frHomeString, String reportNameString) throws Exception{
@@ -54,12 +59,14 @@ public class CompleteQty2XlsxServiceImp implements CompleteQty2XlsxService{
         I18nResource.getInstance();
         module.start();
         Map<String, Object> parameterMap = new HashMap<String, Object>();
+        parameterMap.put("END_TIME", DateTools.getDateTime(new Date(), 0));
+        parameterMap.put("START_TIME", DateTools.getDateTime(new Date(), -1));
         SimpleDateFormat fileName = new SimpleDateFormat(Constant.TIME_FORMAT);
         
         try {
         	 WorkBook workbook = (WorkBook) TemplateWorkBookIO.readTemplateWorkBook(reportNameString);
         	// 定义输出流
-             String outputUrl=Constant.OUTPUT_RUL;
+             String outputUrl=Constant.OUTPUT_URL;
              FileOutputStream outputStream;
              outputStream = new FileOutputStream(new java.io.File(outputUrl+fileName+".xlsx"));
              StreamExcel2007Exporter<Object> excelExport = new StreamExcel2007Exporter<Object>(); 
